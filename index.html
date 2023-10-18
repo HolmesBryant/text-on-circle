@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="/style.css" rel="stylesheet" type="text/css" />
+  <script defer type="module" src="/text-on-circle.js"></script>
+  <script>
+    function change(evt, attr) {
+      const el = document.querySelector('text-on-circle');
+      switch (attr) {
+        case 'size':
+          el.style.width = evt.target.value;
+          break;
+        default:
+          el.setAttribute(attr, evt.target.value);
+          console.log(attr, el.getAttribute(attr));
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <p>
+    <details>
+      <summary><h1>Text on circle component</h1></summary>
+      <p>
+        Renders text on a circle.
+      </p>
+      <div>
+        <h3>Attributes</h3>
+        <ul>
+          <li>fill [optional]: The color of the inside of the circle. "none" for transparent.</li>
+          <li>stroke [optional]: The color of the line around the circle. "none" for transparent.</li>
+          <li>text [optional]: The text to place on the circle. This is used primarily for dynamically changing the test with javascript
+            <ul>
+              <li>
+                example: elem.setAttribute('text', 'Some other text.');
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3>Usage</h3>
+          <code>
+            &lt;script type="module" src="text-on-circle.js"&gt;&lt;/script&gt;<br>
+            &lt;text-on-circle&gt;Some Text on a Circle&lt;/text-on-circle&gt;
+          </code>
+      </div>
+    </details>
+  </p>
+
+  <p>
+    <label>
+      Size:<br>
+      <select onchange="change(event, 'size')">
+        <option value="">Default</option>
+        <option>100px</option>
+        <option>100vw</option>
+      </select>
+    </label>
+    <label>
+      Fill:<br>
+      <select onchange="change(event, 'fill')">
+        <option value="none">Default</option>
+        <option>orange</option>
+      </select>
+    </label>
+    <label>
+      Stroke:<br>
+      <select onchange="change(event, 'stroke')">
+        <option value="none">Default</option>
+        <option>black</option>
+      </select>
+    </label>
+    <label>
+      Text Color:<br>
+      <select onchange="change(event, 'stroke')">
+        <option value="none">Default</option>
+        <option>black</option>
+      </select>
+    </label>
+    <label>
+      Text:<br>
+      <input oninput="change(event, 'text')">
+  </label>
+  </p>
+
+  <div id="container">
+    <text-on-circle>Some Text on a Circle</text-on-circle>
+  </div>
+</body>
+</html>

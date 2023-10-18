@@ -1,0 +1,50 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: rgb(245,245,245);
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  display: inline-block;
+  margin: 0;
+}
+
+summary { cursor: pointer; }
+
+text-on-circle {
+  width: 300px;
+  transition: all .5s;
+}
+
+label {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+input, select {
+  border-radius: 10px;
+  padding: 5px;
+}
+
+details > * {
+  background: white;
+  border-radius: 20px;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+#container {
+  align-items: center;
+  background: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display:flex;
+  justify-content: center;
+  padding: 1rem;
+}
