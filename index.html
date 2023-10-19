@@ -7,19 +7,6 @@
   <title>replit</title>
   <link href="/style.css" rel="stylesheet" type="text/css" />
   <script defer type="module" src="/text-on-circle.js"></script>
-  <script>
-    function change(evt, attr) {
-      const el = document.querySelector('text-on-circle');
-      switch (attr) {
-        case 'size':
-          el.style.width = evt.target.value;
-          break;
-        default:
-          el.setAttribute(attr, evt.target.value);
-          console.log(attr, el.getAttribute(attr));
-      }
-    }
-  </script>
 </head>
 
 <body>
@@ -92,5 +79,18 @@
   <div id="container">
     <text-on-circle>Some Text on a Circle</text-on-circle>
   </div>
+
+  <script>
+    function change(evt, attr) {
+      const el = document.querySelector('text-on-circle');
+      switch (attr) {
+        case 'size':
+          el.style.width = evt.target.value;
+          break;
+        default:
+          el.setAttribute(attr, evt.target.value);
+      }
+    }
+  </script>
 </body>
 </html>
