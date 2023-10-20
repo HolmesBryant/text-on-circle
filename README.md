@@ -1,6 +1,7 @@
 # Text on circle component
 
 Renders text on a circle.
+Demo: https://holmesbryant.github.io/text-on-circle/
 
 ### Attributes
 
