@@ -1,4 +1,4 @@
-# Text on circle component
+# Text on Circle Web Component
 
 Renders text on a circle.
 
