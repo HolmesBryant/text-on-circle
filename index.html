@@ -19,14 +19,20 @@
       <div>
         <h3>Attributes</h3>
         <ul>
-          <li>fill [optional]: The color of the inside of the circle. "none" for transparent.</li>
-          <li>stroke [optional]: The color of the line around the circle. "none" for transparent.</li>
-          <li>text [optional]: The text to place on the circle. This is used primarily for dynamically changing the test with javascript
+          <li>size: Not an actual attribute. Use normal css.
             <ul>
               <li>
-                example: elem.setAttribute('text', 'Some other text.');
+                example: <code>text-in-circle { width: 300px; }</code>
               </li>
             </ul>
+          </li>
+          <li><b>fill</b> optional (default: none) The color of the inside of the circle.</li>
+          <li><b>stroke</b> optional (default: none) The color of the line around the circle.</li>
+          <li><b>textcolor</b> optional (default: inherit) The color of the text.</li>
+          <li><b>font</b> optional (default: inherit) The text font.</li>
+          <li><b>fontsize</b> optional (default: inherit) The size of the text.</li>
+          <li><b>fontweight</b> optional (default: inherit) The weight of the text.</li>
+          <li><b>text</b> optional (default: ' ') The text to place on the circle. This is used for dynamically changing the text with javascript. For normal use, just include the text inside the opening and closing tags.
           </li>
         </ul>
       </div>
@@ -40,41 +46,91 @@
     </details>
   </p>
 
-  <p>
+  <fieldset>
+    <legend>Available Attributes</legend>
     <label>
-      Size:<br>
-      <select onchange="change(event, 'size')">
-        <option value="">Default</option>
-        <option>100px</option>
-        <option>100vw</option>
-      </select>
+      size<br>
+      <input type="range" oninput="change(event, 'size')">
     </label>
+
     <label>
-      Fill:<br>
+      fill<br>
       <select onchange="change(event, 'fill')">
-        <option value="none">Default</option>
+        <option value="none">Default (none)</option>
         <option>orange</option>
+        <option>#ff5f00</option>
+        <option>hsl(89.75, 100%, 50%)</option>
+        <option>rgb(0, 161.77, 255)</option>
+        <option>oklch(0.52642 0.29298 292.73)</option>
       </select>
     </label>
+
     <label>
-      Stroke:<br>
+      stroke<br>
       <select onchange="change(event, 'stroke')">
-        <option value="none">Default</option>
+        <option value="none">Default (none)</option>
         <option>black</option>
+        <option>orange</option>
+        <option>#ff5f00</option>
+        <option>hsl(89.75, 100%, 50%)</option>
+        <option>rgb(0, 161.77, 255)</option>
+        <option>oklch(0.52642 0.29298 292.73)</option>
       </select>
     </label>
+
     <label>
-      Text Color:<br>
-      <select onchange="change(event, 'stroke')">
-        <option value="none">Default</option>
+      textcolor<br>
+      <select onchange="change(event, 'textcolor')">
+        <option value="none">Default (inherit)</option>
         <option>black</option>
+        <option>orange</option>
+        <option>#ff5f00</option>
+        <option>hsl(89.75, 100%, 50%)</option>
+        <option>rgb(0, 161.77, 255)</option>
+        <option>oklch(0.52642 0.29298 292.73)</option>
       </select>
     </label>
+
     <label>
-      Text:<br>
+      font<br>
+      <select onchange="change(event, 'font')">
+        <option value="inherit">Default (inherit)</option>
+        <option>Verdana</option>
+        <option>Trebuchet MS</option>
+        <option>Times New Roman</option>
+        <option>Courier New</option>
+        <option>Brush Script MT</option>
+      </select>
+    </label>
+
+    <label>
+      fontsize<br>
+      <select onchange="change(event, 'fontsize')">
+        <option value="inherit">Default (inherit)</option>
+        <option>9px</option>
+        <option>1.2em</option>
+        <option>1.3rem</option>
+        <option>xx-large</option>
+      </select>
+    </label>
+
+    <label>
+      fontweight<br>
+      <select onchange="change(event, 'fontweight')">
+        <option value="inherit">Default (inherit)</option>
+        <option>normal</option>
+        <option>bold</option>
+        <option>900</option>
+      </select>
+    </label>
+
+    <label>
+      text<br>
       <input oninput="change(event, 'text')">
   </label>
-  </p>
+
+  <button onclick="location.reload(false)">Reset</button>
+  </fieldset>
 
   <div id="container">
     <text-on-circle>Some Text on a Circle</text-on-circle>
@@ -85,7 +141,7 @@
       const el = document.querySelector('text-on-circle');
       switch (attr) {
         case 'size':
-          el.style.width = evt.target.value;
+          el.style.width = evt.target.value + '%';
           break;
         default:
           el.setAttribute(attr, evt.target.value);
