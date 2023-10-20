@@ -2,6 +2,8 @@
 
 Renders text on a circle.
 
+Demo: https://holmesbryant.github.io/text-on-circle/
+
 ### Attributes
 
 -   size: Not an actual attribute. Use normal css.
