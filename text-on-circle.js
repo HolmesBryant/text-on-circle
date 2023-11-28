@@ -131,7 +131,7 @@ export class TextOnCircle extends HTMLElement {
 
   set textcolor(value) {
     this.#textcolor = value;
-    const el = this.shadow.querySelector('textpath');
+    const el = this.shadow.querySelector('textPath');
     el.style.fill = value;
   }
 
