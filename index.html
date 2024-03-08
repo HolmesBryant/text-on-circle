@@ -5,148 +5,472 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Text On Circle Web Component</title>
-  <script defer type="module" src="text-on-circle.js"></script>
   <link rel="stylesheet" href="style.css">
+  <script type="module" src="src/text-on-circle.js"></script>
+  <script type="module" src="extra/wijit-form.js"></script>
+  <script type="module" src="extra/wijit-code.js"></script>
+  <script type="module" src="extra/sliding-doors.min.js"></script>
+
+  <style>
+    text-on-circle {
+      display: block;
+    }
+
+    .gradient {
+      height: 100%;
+      width: 100%;
+      background-image: radial-gradient(yellow, orangered, yellow);
+    }
+  </style>
 </head>
 
 <body>
-  <p>
-    <details>
-      <summary><h1>Text on Circle Web Component</h1></summary>
-      <p>
-        Renders text on a circle.
-      </p>
-      <div>
-        <h3>Attributes</h3>
-        <ul>
-          <li>size: Not an actual attribute. Use normal css.
-            <ul>
-              <li>
-                example: <code>text-in-circle { width: 300px; }</code>
-              </li>
-            </ul>
-          </li>
-          <li><b>fill</b> optional (default: none) The color of the inside of the circle.</li>
-          <li><b>stroke</b> optional (default: none) The color of the line around the circle.</li>
-          <li><b>textcolor</b> optional (default: inherit) The color of the text.</li>
-          <li><b>font</b> optional (default: inherit) The text font.</li>
-          <li><b>fontsize</b> optional (default: inherit) The size of the text.</li>
-          <li><b>fontweight</b> optional (default: inherit) The weight of the text.</li>
-          <li><b>text</b> optional (default: ' ') The text to place on the circle. This is used for dynamically changing the text with javascript. For normal use, just include the text inside the opening and closing tags.
-          </li>
-        </ul>
+  <header id="title">
+    <h1>Text-On-Circle web component</h1>
+  </header>
+
+  <details data-url="./">
+    <summary>Instructions</summary>
+    <div id="readme" data-url="./README.md"> </div>
+  </details>
+
+  <section id="demo">
+      <wijit-form id="settings">
+        <section class="row">
+          <aside style="flex: 1 0 150px;">
+            <button onclick="location.reload(false)">Reset</button>
+
+            <div>
+              <label for="component-size">
+                Component Size
+              </label>
+              <input id="component-size" type="range" value="100" max="200" oninput="change(event, 'size')">
+            </div>
+
+            <div>
+              <label for="viewbox">viewbox</label>
+              <select
+              style="font-size:small"
+              id="viewbox"
+              onchange="change(event, 'viewbox')">
+                <option value="0 0 100 100">(Default) 0 0 100 100</option>
+                <option>0 -10 50 50</option>
+                <option>5 -60 45 45</option>
+                <option>54 -65 36 30</option>
+                <option>50 -15 50 50</option>
+                <option>0 0 200 200</option>
+                <option>50 0 250 250</option>
+                <option>-200 150 250 250</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="text">
+                text
+              </label>
+              <textarea id="text" oninput="change(event, 'text')"></textarea>
+            </div>
+          </aside>
+
+          <fieldset style="flex:2 1 25rem">
+            <legend>CSS variables</legend>
+            <div class="row reverse start">
+              <label for="text-color">
+                --text-color
+              </label>
+              <select
+              id="text-color"
+              onchange="changeCss( event, '--text-color' )">
+                <option value="inherit">Default (inherit)</option>
+                <option>black</option>
+                <option>orange</option>
+                <option>#ff5f00</option>
+                <option>hsl(89.75, 100%, 50%)</option>
+                <option>rgb(0, 161.77, 255)</option>
+                <option>oklch(0.52642 0.29298 292.73)</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="text-shadow">
+                --text-shadow
+              </label>
+              <select
+              id="text-shadow"
+              onchange="changeCss( event, '--text-shadow')">
+                <option>Default (none)</option>
+                <option>2px 2px 5px</option>
+                <option>.5rem 1rem .4rem aqua</option>
+                <option>5px 5px 10px rgb(150, 150, 150)</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="font">
+                --font
+              </label>
+              <select
+              id="font"
+              onchange="changeCss( event, '--font' )">
+                <option value="inherit">Default (inherit)</option>
+                <option>Times New Roman</option>
+                <option>Courier New</option>
+                <option>Brush Script MT</option>
+                <option>sans-serif</option>
+                <option>fantasy</option>
+                <option>cursive</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="font-size">
+                --fontsize
+              </label>
+              <select
+              id="font-size"
+              onchange="changeCss( event, '--fontsize' )">
+                <option value="inherit">Default (inherit)</option>
+                <option>9px</option>
+                <option>1.2em</option>
+                <option>1.3rem</option>
+                <option>xx-large</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="font-weight">
+                --fontweight
+              </label>
+              <select
+              id="font-weight"
+              onchange="changeCss( event, '--fontweight' )">
+                <option value="inherit">Default (inherit)</option>
+                <option>normal</option>
+                <option>bold</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="circle-fill">
+                --circle-fill-color
+              </label>
+                <select
+                id="circle-fill"
+                onchange="changeCss( event, '--circle-fill-color' )">
+                  <option value="none">Default (none)</option>
+                  <option>orange</option>
+                  <option>#ff5f00</option>
+                  <option>hsl(89.75, 100%, 50%)</option>
+                  <option>rgb(0, 161.77, 255)</option>
+                  <option>oklch(0.52642 0.29298 292.73)</option>
+                </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="circle-stroke-color">
+                --circle-stroke-color
+              </label>
+              <select
+              id="circle-stroke-color"
+              onchange="changeCss( event, '--circle-stroke-color' )">
+                <option value="none">Default (none)</option>
+                <option>black</option>
+                <option>orange</option>
+                <option>#ff5f00</option>
+                <option>hsl(89.75, 100%, 50%)</option>
+                <option>rgb(0, 161.77, 255)</option>
+                <option>oklch(0.52642 0.29298 292.73)</option>
+              </select>
+            </div>
+
+            <div class="row reverse start">
+              <label for="circle-stroke-width">
+                --circle-stroke-width
+              </label>
+              <select
+              id="circle-stroke-width"
+              onchange="changeCss( event, '--circle-stroke-width' )">
+                <option value="1">Default (1)</option>
+                <option>4</option>
+                <option>1.5em</option>
+                <option>100%</option>
+                <option>10px</option>
+              </select>
+            </div>
+          </fieldset>
+        </section>
+      </wijit-form>
+
+      <div class="flex center">
+        <text-on-circle id="toc">
+          Some Text On a Circle
+        </text-on-circle>
       </div>
-      <div>
-        <h3>Usage</h3>
-          <code>
-            &lt;script type="module" src="text-on-circle.js"&gt;&lt;/script&gt;<br>
-            &lt;text-on-circle&gt;Some Text on a Circle&lt;/text-on-circle&gt;
-          </code>
-      </div>
-    </details>
-  </p>
+  </section>
 
-  <fieldset>
-    <legend>Available Attributes</legend>
-    <label>
-      size<br>
-      <input type="range" oninput="change(event, 'size')">
-    </label>
+  <section id="examples">
+    <div class="card">
+      <header>
+        <h3>Change the View Box</h3>
+      </header>
 
-    <label>
-      fill<br>
-      <select onchange="change(event, 'fill')">
-        <option value="none">Default (none)</option>
-        <option>orange</option>
-        <option>#ff5f00</option>
-        <option>hsl(89.75, 100%, 50%)</option>
-        <option>rgb(0, 161.77, 255)</option>
-        <option>oklch(0.52642 0.29298 292.73)</option>
-      </select>
-    </label>
+      <text-on-circle viewbox="10 -25 75 75">
+        Some Text on a Circle
+      </text-on-circle>
 
-    <label>
-      stroke<br>
-      <select onchange="change(event, 'stroke')">
-        <option value="none">Default (none)</option>
-        <option>black</option>
-        <option>orange</option>
-        <option>#ff5f00</option>
-        <option>hsl(89.75, 100%, 50%)</option>
-        <option>rgb(0, 161.77, 255)</option>
-        <option>oklch(0.52642 0.29298 292.73)</option>
-      </select>
-    </label>
+      <wijit-code indent=1>
+        <textarea>
+          <text-on-circle
+            viewbox="10 -25 75 75">
+            ...
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
 
-    <label>
-      textcolor<br>
-      <select onchange="change(event, 'textcolor')">
-        <option value="none">Default (inherit)</option>
-        <option>black</option>
-        <option>orange</option>
-        <option>#ff5f00</option>
-        <option>hsl(89.75, 100%, 50%)</option>
-        <option>rgb(0, 161.77, 255)</option>
-        <option>oklch(0.52642 0.29298 292.73)</option>
-      </select>
-    </label>
+    <div class="card">
+      <header>
+        <h3>Long Text</h3>
+      </header>
 
-    <label>
-      font<br>
-      <select onchange="change(event, 'font')">
-        <option value="inherit">Default (inherit)</option>
-        <option>Verdana</option>
-        <option>Trebuchet MS</option>
-        <option>Times New Roman</option>
-        <option>Courier New</option>
-        <option>Brush Script MT</option>
-      </select>
-    </label>
+      <text-on-circle style="--fontsize:2px">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+      </text-on-circle>
 
-    <label>
-      fontsize<br>
-      <select onchange="change(event, 'fontsize')">
-        <option value="inherit">Default (inherit)</option>
-        <option>9px</option>
-        <option>1.2em</option>
-        <option>1.3rem</option>
-        <option>xx-large</option>
-      </select>
-    </label>
+      <wijit-code indent=1>
+        <textarea>
+          <style>
+            text-on-circle {
+              --fontsize: 2px;
+            }
+          </style>
+          <text-on-circle>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
 
-    <label>
-      fontweight<br>
-      <select onchange="change(event, 'fontweight')">
-        <option value="inherit">Default (inherit)</option>
-        <option>normal</option>
-        <option>bold</option>
-        <option>900</option>
-      </select>
-    </label>
+    <div class="card">
+      <header>
+        <h3>Change CSS variables</h3>
+      </header>
 
-    <label>
-      text<br>
-      <input oninput="change(event, 'text')">
-  </label>
+      <text-on-circle
+        style="
+        --text-color:turquoise;
+        --text-shadow: 0px 10px 10px var(--text-color);
+        --font: 'Courier New';
+        --fontsize: 10px;
+        --fontweight: bold;
+        --circle-fill-color: rgb(20, 20, 20);
+        --circle-stroke-color: darkslategray;
+        --circle-stroke-width: 1rem;
+        ">
+        Some Text on a Circle
+      </text-on-circle>
 
-  <button onclick="location.reload(false)">Reset</button>
-  </fieldset>
+      <wijit-code indent=1>
+        <textarea>
+          <style>
+            text-on-circle {
+              --text-color:turquoise;
+              --text-shadow: 0px 10px 10px var(--text-color);
+              --font: 'Courier New';
+              --fontsize: 10px;
+              --fontweight: bold;
+              --circle-fill-color: rgb(20, 20, 20);
+              --circle-stroke-color: darkslategray;
+              --circle-stroke-width: 1rem;
+            }
+          </style>
+          <text-on-circle>
+            ...
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
 
-  <div id="container">
-    <text-on-circle>Some Text on a Circle</text-on-circle>
-  </div>
+    <div class="card">
+      <header>
+        <h3>Add Gradient</h3>
+      </header>
+      <text-on-circle>
+        Some Text on a Circle
+        <div slot="inside" class="gradient"></div>
+      </text-on-circle>
+    </div>
+
+    <div class="card">
+      <header>
+        <h3>Insert an Image</h3>
+      </header>
+
+      <figure>
+        <text-on-circle>
+          Some Text on a Circle
+          <img slot="inside" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Salem">
+        </text-on-circle>
+        <figcaption>
+        <center><small>
+          <a href="https://www.dicebear.com/" target="_blank">Image courtesy of DiceBear</a>
+        </small></center>
+      </figcaption>
+    </figure>
+      <wijit-code indent=1>
+        <textarea>
+          <text-on-circle>
+            ...
+            <img slot="inside" src="...">
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
+
+    <div class="card">
+      <header>
+        <h3>Place text behind the image</h3>
+      </header>
+
+      <figure>
+        <text-on-circle style="--text-behind:1">
+          Some Text on a Circle
+          <img slot="inside" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Salem">
+        </text-on-circle>
+        <figcaption>
+          <center><small>
+            <a href="https://www.dicebear.com/" target="_blank">Image courtesy of DiceBear</a>
+          </small></center>
+        </figcaption>
+      </figure>
+
+      <wijit-code indent=1>
+        <textarea>
+          <style>
+            text-on-circle {
+              --text-behind: 1;
+            }
+          </style>
+          <text-on-circle>
+            ...
+            <img slot="inside" src="...">
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
+
+    <div class="card">
+      <header>
+        <h3>Insert custom element</h3>
+      </header>
+
+      <figure>
+        <text-on-circle style="--text-shadow: 0 10px 10px black">
+          Some text on a Circle
+          <sliding-doors active slot="inside" id="custom-elem-example">
+              <div><p>
+                You can place any valid HTML element or custom element inside the circle.
+            </p></div>
+          </sliding-doors>
+        </text-on-circle>
+        <figcaption>
+          <center>
+            <button onclick="toggleDoors('#custom-elem-example')">Open / Close</button>
+          </center>
+        </figcaption>
+      </figure>
+
+      <wijit-code indent=1>
+        <textarea>
+          <text-on-circle>
+            Some text on a Circle
+          <sliding-doors>
+              <p>...</p>
+          </sliding-doors>
+        </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
+
+    <div class="card">
+      <header>
+        <h3>Behavior of text when it's too long for the circle</h3>
+      </header>
+
+      <figure>
+        <text-on-circle id="typewriter" style="--text-behind:1">
+          abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ**********************************************
+          <button slot="inside" onclick="typewriter()">Begin Demo</button>
+        </text-on-circle>
+      </figure>
+
+      <wijit-code indent=1>
+        <textarea>
+          <text-on-circle>
+            abcdefghijk lmnopqrstuv wxyzABCDE FGHIJKLMNOP QRSTUVWXYZ* *********** *********** *********** ************
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
+    </div>
+  </section>
+
+  <footer>&nbsp;</footer>
 
   <script>
-    function change(evt, attr) {
-      const el = document.querySelector('text-on-circle');
-      switch (attr) {
+    function change( evt, attr ) {
+      const elem = document.querySelector( 'text-on-circle' );
+      switch( attr ) {
         case 'size':
-          el.style.width = evt.target.value + '%';
+          elem.style.width = evt.target.value + '%';
+          break;
+        case 'text':
+          elem.textContent = event.target.value;
           break;
         default:
-          el.setAttribute(attr, evt.target.value);
+          elem.setAttribute( attr, evt.target.value );
       }
     }
+
+    function changeCss( event, attr ) {
+      const elem = document.querySelector( '#toc' );
+      elem.style.setProperty( attr, event.target.value );
+    }
+
+    function toggleDoors( target ) {
+      document.querySelector( target ).toggleAttribute( 'active' );
+    }
+
+    /**
+     * Grab the README file and stick it in the "instructions"  container
+     */
+    function getReadme () {
+      const element = document.querySelector('#readme');
+      fetch ( './README.md' )
+      .then ( response => response.text() )
+      .then ( text => {
+        element.textContent = text;
+      });
+    }
+
+    function typewriter() {
+      const elem = document.querySelector('#typewriter');
+      const text = elem.textContent.trim();
+      const speed = 200;
+      let i = 0;
+
+      elem.textContent = '';
+      const typing = setInterval(() => {
+        elem.textContent += text[i];
+        i++;
+        if (i === text.length) {
+          clearInterval(typing);
+          elem.insertAdjacentHTML('beforeend', '<button slot="inside" onclick="typewriter()">Begin</button>')
+        }
+      }, speed);
+    }
+
+    getReadme();
+    // typewriter();
   </script>
 </body>
 </html>

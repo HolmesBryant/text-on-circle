@@ -1,60 +1,216 @@
 html {
-  height: 100%;
-  width: 100%;
-}
+      --accent-color: lightslategray;
+      --bg1-color: rgb(250, 250, 250);
+      --bg2-color: #f2f2f2;
+      --bg3-color: white;
+      --border-color: silver;
+      --text-color: rgb(60, 60, 60);
 
-body {
-  background: rgb(245,245,245);
-  font-family: sans-serif;
-  font-size: 16px;
-}
+      height: 100%;
+    }
 
-details > * {
-  background: white;
-  border-radius: 20px;
-  margin: 1rem 0;
-  padding: 1rem;
-}
+    body {
+      background: var(--bg1-color);
+      color: var(--text-color);
+      display: grid;
+      font-family: sans-serif;
+      font-size: 16px;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, max-content);
+      height: 100%;
+      letter-spacing: .1rem;
+      line-height: 1.5rem;
+      margin: auto;
+      padding: 1rem;
+    }
 
-fieldset {
-  border: 1px solid silver;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-}
+    body * { box-sizing: border-box; }
 
-legend {
-  font-weight: bold;
-}
+    @media (prefers-color-scheme: dark) {
+      html {
+        --accent-color: gray;
+        --bg1-color: rgb(20, 20, 20);
+        --bg2-color: rgb(40,40,40);
+        --bg3-color: rgb(60, 60, 60);
+        --border-color: dimgray;
+        --text-color: rgb(240, 240, 240);
+      }
+    }
 
-h1 {
-  display: inline-block;
-  margin: 0;
-}
+    /**** Backgrounds ****/
+      div,
+      summary
+        { background-color: var(--bg2-color) }
 
-input, select {
-  border-radius: 10px;
-  padding: 5px;
-}
+      button,
+      details
+      { background-color: var(--bg3-color) }
 
-label {
-  display: inline-block;
-  margin: 5px;
-}
+      button:hover,
+      button.active-tab,
+      summary:hover,
+      details[open] > summary
+      { background-color: var(--accent-color) }
 
-summary { cursor: pointer; }
+      wijit-code,
+      sliding-doors > div
+      { background: var(--accent-color) }
 
-text-on-circle {
-  width: 300px;
-  transition: all .5s;
-}
+    /**** Borders ****/
+      button,
+      details
+      { border: 1px solid var(--border-color); }
 
-#container {
-  align-items: center;
-  background: white;
-  border: 1px solid black;
-  border-radius: 20px;
-  box-sizing: border-box;
-  display:flex;
-  justify-content: center;
-  padding: 1rem;
-}
+        article,
+        details,
+        section,
+        summary
+        { border-radius: .5rem; }
+
+        wijit-tabs button
+        { border-radius: .5rem .5rem 0 0 }
+
+    /**** Text ****/
+      a {
+        color: var(--accent-color);
+      }
+
+      button
+      { color: var(--text-color) }
+
+      button.active-tab
+      {
+        font-size: larger;
+        font-weight: bold;
+      }
+
+      summary
+      {
+        font-size: x-large;
+        font-weight: bold;
+      }
+
+    /**** Cursor ****/
+      button,
+      summary
+      { cursor: pointer; }
+
+    /**** Structure ****/
+
+      button {
+        padding: .5rem;
+        border-radius: 5px;
+      }
+
+      details
+      { overflow: auto; }
+
+      details[open]
+      { height: 80vh; }
+
+      details[open] > summary
+      { margin-bottom: 1rem; }
+
+      header
+      {
+        flex: 0;
+        padding: 0 1rem;
+      }
+
+      li
+      { margin-bottom: 1rem; }
+
+      ul, ol
+      { margin: 0; }
+
+      section#demo {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      section#examples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      section > div {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      section#demo #settings {
+        grid-column: 1 / span 2;
+      }
+
+      sliding-doors {
+        display: block;
+      }
+
+      sliding-doors > div {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+      }
+
+      sliding-doors p {
+        padding: 25% 18%;
+        text-align: center;
+      }
+
+      summary {
+        font-size: 2rem;
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      .card {
+        display: flex;
+      	flex: 1;
+        min-width: 300px;
+        max-width: 500px;
+      }
+
+      .card > *:not(header) {
+        flex: 1;
+        scrollbar-color: var(--bg3-color) var(--bg2-color);
+      }
+
+      .center {
+        justify-content: center;
+      }
+
+      .row.center {
+        align-items: center;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .row {
+        flex-direction: row;
+      }
+
+      .sticky {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      #readme {
+        padding: 1rem;
+        text-indent: 3em;
+        white-space:pre-wrap;
+      }
+
+    /****** Media Queries ******/
+      @media only screen and (max-width: 300px) {
+        * { padding: 0; }
+      }
