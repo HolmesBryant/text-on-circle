@@ -299,6 +299,19 @@
         Some Text on a Circle
         <div slot="inside" class="gradient"></div>
       </text-on-circle>
+
+      <wijit-code indent=1>
+        <textarea>
+          <text-on-circle>
+            ...
+            <div
+              slot="inside"
+              style="width:100%; height:100%"
+              class="gradient">
+            </div>
+          </text-on-circle>
+        </textarea>
+      </wijit-code>
     </div>
 
     <div class="card">
@@ -384,8 +397,8 @@
         <textarea>
           <text-on-circle>
             Some text on a Circle
-          <sliding-doors>
-              <p>...</p>
+          <sliding-doors slot="inside">
+            ...
           </sliding-doors>
         </text-on-circle>
         </textarea>
