@@ -22,13 +22,7 @@ Demo: [https://holmesbryant.github.io/text-on-circle/](https://holmesbryant.gith
 
 - **viewbox** Defines the position and dimensions ot the circle (svg) viewport.
     - Default: '0 0 100 100'
-    - Acceptable values: A list of four numbers: x, y, width and height. The numbers 'x' and 'y' represent the top left coordinates of the component's viewport. The numbers 'width' and 'height' represent its dimensions (in svg "user space" units). These numbers, which are separated by whitespace and/or commas, specify a rectangle which is mapped to the bounds of the component's viewport (**not the browser viewport**). Smaller values for width and height, cause the text to appear larger. The "x" and "y" values cause the rendered area to be offset. Any text that falls outside the viewbox bounds will be clipped.
-  
-
-    //example
-    <text-on-circle viewbox="5 -60 45 45">
-	    ...
-    </text-on-circle>
+    - Acceptable values: A list of four numbers: x, y, width and height. The numbers 'x' and 'y' represent the top left coordinates of the component's viewport. The numbers 'width' and 'height' represent its dimensions (in svg "user space" units). These numbers, which are separated by whitespace and/or commas, specify a rectangle which is mapped to the bounds of the component's viewport (**not the browser viewport**). Smaller values for width and height, cause the text to appear larger. The "x" and "y" values cause the rendered area to be offset. Any text that falls outside the viewbox bounds will be clipped. (example: [text-on-circle viewbox="5 -60 45 45"])
 
 ## CSS Custom Variables
 
