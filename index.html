@@ -233,9 +233,11 @@
         <h3>Long Text</h3>
       </header>
 
-      <text-on-circle style="--fontsize:2px">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
-      </text-on-circle>
+      <figure>
+        <text-on-circle style="--fontsize:2px">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.
+        </text-on-circle>
+      </figure>
 
       <wijit-code indent=1>
         <textarea>
@@ -256,19 +258,21 @@
         <h3>Change CSS variables</h3>
       </header>
 
-      <text-on-circle
-        style="
-        --text-color:turquoise;
-        --text-shadow: 0px 10px 10px var(--text-color);
-        --font: 'Courier New';
-        --fontsize: 10px;
-        --fontweight: bold;
-        --circle-fill-color: rgb(20, 20, 20);
-        --circle-stroke-color: darkslategray;
-        --circle-stroke-width: 1rem;
-        ">
-        Some Text on a Circle
-      </text-on-circle>
+      <figure>
+        <text-on-circle
+          style="
+          --text-color:turquoise;
+          --text-shadow: 0px 10px 10px var(--text-color);
+          --font: 'Courier New';
+          --fontsize: 10px;
+          --fontweight: bold;
+          --circle-fill-color: rgb(20, 20, 20);
+          --circle-stroke-color: darkslategray;
+          --circle-stroke-width: 1rem;
+          ">
+          Some Text on a Circle
+        </text-on-circle>
+      </figure>
 
       <wijit-code indent=1>
         <textarea>
@@ -295,10 +299,13 @@
       <header>
         <h3>Add Gradient</h3>
       </header>
-      <text-on-circle>
-        Some Text on a Circle
-        <div slot="inside" class="gradient"></div>
-      </text-on-circle>
+
+      <figure>
+        <text-on-circle>
+          Some Text on a Circle
+          <div slot="inside" class="gradient"></div>
+        </text-on-circle>
+      </figure>
 
       <wijit-code indent=1>
         <textarea>
@@ -454,7 +461,7 @@
     }
 
     /**
-     * Grab the README file and stick it in the "instructions"  container
+     * Grab the README file
      */
     function getReadme () {
       const element = document.querySelector('#readme');
