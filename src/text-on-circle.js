@@ -45,7 +45,6 @@ export class TextOnCircle extends HTMLElement {
 
   /**
    * Constructor
-   * @return {[type]} [description]
    */
   constructor() {
     super();
