@@ -211,4 +211,6 @@ export class TextOnCircle extends HTMLElement {
   }
 }
 
-document.addEventListener('DOMContentLoaded', customElements.define('text-on-circle', TextOnCircle));
+if (!customElements.get('text-on-circle')) {
+    customElements.define('text-on-circle', TextOnCircle)
+  }
